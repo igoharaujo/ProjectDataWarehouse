@@ -26,7 +26,7 @@
 					"value": "@dataset().Schema",
 					"type": "Expression"
 				},
-				"fileSystem": "landing-zone"
+				"fileSystem": "AdventureWorks"
 			},
 			"compressionCodec": "snappy"
 		},
