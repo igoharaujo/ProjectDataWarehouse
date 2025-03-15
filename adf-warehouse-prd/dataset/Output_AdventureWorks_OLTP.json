@@ -23,7 +23,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@dataset().Schema",
+					"value": "@concat('AdventureWorks',dataset().Schema)",
 					"type": "Expression"
 				},
 				"fileSystem": "landing-zone"
