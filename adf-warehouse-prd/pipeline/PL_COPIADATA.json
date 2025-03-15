@@ -17,6 +17,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "@pipeline().parameters.Query",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -42,17 +46,7 @@
 				"inputs": [
 					{
 						"referenceName": "Input_AdventureWorks_OLTP",
-						"type": "DatasetReference",
-						"parameters": {
-							"Schema": {
-								"value": "@pipeline().parameters.Schema",
-								"type": "Expression"
-							},
-							"Table": {
-								"value": "@pipeline().parameters.Table",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
@@ -77,10 +71,10 @@
 			"Schema": {
 				"type": "string"
 			},
-			"Table": {
+			"File_name": {
 				"type": "string"
 			},
-			"File_name": {
+			"Query": {
 				"type": "string"
 			}
 		},
