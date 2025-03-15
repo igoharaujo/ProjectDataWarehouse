@@ -9,7 +9,7 @@
 			"Schema": {
 				"type": "string"
 			},
-			"Table": {
+			"File_name": {
 				"type": "string"
 			}
 		},
@@ -19,14 +19,14 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@concat(dataset().Schema,'.',dataset().Table)",
+					"value": "@dataset().File_name",
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@dataset().Schema",
+					"value": "@concat('AdventureWorks/',dataset().Schema)",
 					"type": "Expression"
 				},
-				"fileSystem": "landing"
+				"fileSystem": "landing-zone"
 			},
 			"compressionCodec": "snappy"
 		},
