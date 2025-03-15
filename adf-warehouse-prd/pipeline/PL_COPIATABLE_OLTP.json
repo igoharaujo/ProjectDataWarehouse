@@ -37,7 +37,11 @@
 								"waitOnCompletion": true,
 								"parameters": {
 									"Schema": "@item().source_schema",
-									"Table": "@item().source_table"
+									"Table": "@item().source_table",
+									"File_name": {
+										"value": "@item().file_name",
+										"type": "Expression"
+									}
 								}
 							}
 						}
