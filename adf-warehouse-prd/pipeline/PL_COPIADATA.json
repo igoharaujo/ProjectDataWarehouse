@@ -64,8 +64,8 @@
 								"value": "@pipeline().parameters.Schema",
 								"type": "Expression"
 							},
-							"Table": {
-								"value": "@pipeline().parameters.Table",
+							"File_name": {
+								"value": "@pipeline().parameters.File_name",
 								"type": "Expression"
 							}
 						}
@@ -78,6 +78,9 @@
 				"type": "string"
 			},
 			"Table": {
+				"type": "string"
+			},
+			"File_name": {
 				"type": "string"
 			}
 		},
