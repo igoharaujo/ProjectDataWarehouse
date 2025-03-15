@@ -1,0 +1,12 @@
+{
+	"name": "Input_AdventureWorks_OLTP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Warehouse_SQL_DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
