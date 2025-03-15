@@ -1,0 +1,46 @@
+{
+	"name": "Control_ingestor",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Warehouse_control_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "active",
+				"type": "bit"
+			},
+			{
+				"name": "source_schema",
+				"type": "nvarchar"
+			},
+			{
+				"name": "source_table",
+				"type": "nvarchar"
+			},
+			{
+				"name": "query",
+				"type": "nvarchar"
+			},
+			{
+				"name": "folder",
+				"type": "nvarchar"
+			},
+			{
+				"name": "file_name",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "control_ingestion"
+		}
+	}
+}
