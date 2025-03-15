@@ -7,7 +7,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Control Ingestion",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Lookup1').output.value\n",
+						"value": "@activity('Control Ingestion').output.value\n",
 						"type": "Expression"
 					},
 					"isSequential": false,
 					"activities": [
 						{
-							"name": "Execute Pipeline1",
+							"name": "EXECUTA COPYDATA",
 							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"policy": {
@@ -45,7 +45,7 @@
 				}
 			},
 			{
-				"name": "Lookup1",
+				"name": "Control Ingestion",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
