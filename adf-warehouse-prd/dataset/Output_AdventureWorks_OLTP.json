@@ -9,9 +9,6 @@
 			"Schema": {
 				"type": "string"
 			},
-			"Table": {
-				"type": "string"
-			},
 			"File_name": {
 				"type": "string"
 			}
