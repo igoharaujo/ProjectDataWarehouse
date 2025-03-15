@@ -1,5 +1,5 @@
 {
-	"name": "pipeline2",
+	"name": "PL_COPIATABLE_OLTP",
 	"properties": {
 		"activities": [
 			{
@@ -22,81 +22,24 @@
 					"isSequential": false,
 					"activities": [
 						{
-							"name": "Copydata",
-							"type": "Copy",
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": [
-								{
-									"name": "Schema"
-								},
-								{
-									"name": "Table"
-								}
-							],
+							"userProperties": [],
 							"typeProperties": {
-								"source": {
-									"type": "AzureSqlSource",
-									"queryTimeout": "02:00:00",
-									"partitionOption": "None"
+								"pipeline": {
+									"referenceName": "PL_COPIADATA",
+									"type": "PipelineReference"
 								},
-								"sink": {
-									"type": "ParquetSink",
-									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
-									},
-									"formatSettings": {
-										"type": "ParquetWriteSettings"
-									}
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
+								"waitOnCompletion": true,
+								"parameters": {
+									"Schema": "@item().source_schema",
+									"Table": "@item().source_table"
 								}
-							},
-							"inputs": [
-								{
-									"referenceName": "Input_AdventureWorks_OLTP",
-									"type": "DatasetReference",
-									"parameters": {
-										"Schema": {
-											"value": "@item().source_schema\n",
-											"type": "Expression"
-										},
-										"Table": {
-											"value": "@item().source_table",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "Output_AdventureWorks_OLTP",
-									"type": "DatasetReference",
-									"parameters": {
-										"Schema": {
-											"value": "@item().source_schema",
-											"type": "Expression"
-										},
-										"Table": {
-											"value": "@item().source_table",
-											"type": "Expression"
-										}
-									}
-								}
-							]
+							}
 						}
 					]
 				}
