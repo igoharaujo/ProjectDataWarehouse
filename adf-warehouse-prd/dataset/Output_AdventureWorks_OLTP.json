@@ -11,6 +11,9 @@
 			},
 			"Table": {
 				"type": "string"
+			},
+			"File_name": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -19,7 +22,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@concat(dataset().Schema,'.',dataset().Table)",
+					"value": "@dataset().File_name",
 					"type": "Expression"
 				},
 				"folderPath": {
