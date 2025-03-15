@@ -1,0 +1,9 @@
+{
+	"name": "adf-warehouse-prd",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "58c2a92e-6c21-4dbf-a1c7-a80f0260aa70",
+		"tenantId": "dfb66dc4-3f3c-492c-991d-727dbd1c89d4"
+	}
+}
