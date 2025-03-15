@@ -1,10 +1,109 @@
 {
-	"name": "PL_COPIATABLE_OLTP",
+	"name": "pipeline2",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copydata",
-				"type": "Copy",
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup1').output.value\n",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Copydata",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Schema"
+								},
+								{
+									"name": "Table"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "Input_AdventureWorks_OLTP",
+									"type": "DatasetReference",
+									"parameters": {
+										"Schema": {
+											"value": "@item().source_schema\n",
+											"type": "Expression"
+										},
+										"Table": {
+											"value": "@item().source_table",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "Output_AdventureWorks_OLTP",
+									"type": "DatasetReference",
+									"parameters": {
+										"Schema": {
+											"value": "@item().source_schema",
+											"type": "Expression"
+										},
+										"Table": {
+											"value": "@item().source_table",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -17,70 +116,18 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT  [ID]\n      ,[active]\n      ,[source_schema]\n      ,[source_table]\n      ,[query]\n      ,[folder]\n      ,[file_name]\n  FROM [dbo].[control_ingestion]\nwhere active = 1\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
-					"sink": {
-						"type": "ParquetSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "ParquetWriteSettings"
-						}
+					"dataset": {
+						"referenceName": "Control_ingestor",
+						"type": "DatasetReference"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "Input_AdventureWorks_OLTP",
-						"type": "DatasetReference",
-						"parameters": {
-							"Schema": {
-								"value": "@pipeline().parameters.Schema",
-								"type": "Expression"
-							},
-							"Table": {
-								"value": "@pipeline().parameters.Table",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "Output_AdventureWorks_OLTP",
-						"type": "DatasetReference",
-						"parameters": {
-							"Schema": {
-								"value": "@pipeline().parameters.Schema",
-								"type": "Expression"
-							},
-							"Table": {
-								"value": "@pipeline().parameters.Table",
-								"type": "Expression"
-							}
-						}
-					}
-				]
+					"firstRowOnly": false
+				}
 			}
 		],
-		"parameters": {
-			"Schema": {
-				"type": "string"
-			},
-			"Table": {
-				"type": "string"
-			}
-		},
 		"annotations": []
 	}
 }
