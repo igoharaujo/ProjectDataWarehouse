@@ -1,0 +1,13 @@
+{
+	"name": "LS_Warehouse_ADB",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-2365849942025254.14.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/25f59f8b-6218-42fc-ab5c-b0db5048c6f7/resourceGroups/AdventureWorks-PRD/providers/Microsoft.Databricks/workspaces/adb-adventureworks-prd",
+			"existingClusterId": "0315-171339-zh0hc4k5"
+		}
+	}
+}
