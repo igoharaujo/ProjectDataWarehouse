@@ -5,11 +5,27 @@
 			"referenceName": "LS_Warehouse_ADLS",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"Schema": {
+				"type": "string"
+			},
+			"Table": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Table",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().Schema",
+					"type": "Expression"
+				},
 				"fileSystem": "landing"
 			},
 			"compressionCodec": "snappy"
