@@ -53,7 +53,7 @@
 						},
 						{
 							"name": "Execute table",
-							"type": "DatabricksNotebook",
+							"type": "ExecutePipeline",
 							"dependsOn": [
 								{
 									"activity": "EXECUTA COPYDATA",
@@ -63,25 +63,18 @@
 								}
 							],
 							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
 								"secureInput": false
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"notebookPath": "/Users/igor.faraujo@sempreceub.com/ProjectDataWarehouse/adb-warehouse-prd/ProjetctWarehouse/Bronze - Ingest",
-								"baseParameters": {
-									"Tabela": {
-										"value": "replace(@item().file_name, '.parquet', '')\n",
-										"type": "Expression"
-									}
+								"pipeline": {
+									"referenceName": "PL_EXECUTE_TABLE_BRONZE",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"tabela": "replace(@item().file_name, '.parquet', '')"
 								}
-							},
-							"linkedServiceName": {
-								"referenceName": "LS_Warehouse_ADB",
-								"type": "LinkedServiceReference"
 							}
 						}
 					]
