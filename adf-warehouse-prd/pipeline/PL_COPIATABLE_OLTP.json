@@ -36,7 +36,10 @@
 								},
 								"waitOnCompletion": true,
 								"parameters": {
-									"Schema": "@item().source_schema",
+									"Schema": {
+										"value": "@item().source_schema",
+										"type": "Expression"
+									},
 									"File_name": {
 										"value": "@item().file_name",
 										"type": "Expression"
@@ -46,6 +49,36 @@
 										"type": "Expression"
 									}
 								}
+							}
+						},
+						{
+							"name": "Execute bronze ingest",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "EXECUTA COPYDATA",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Users/igor.faraujo@sempreceub.com/ProjectDataWarehouse/adb-warehouse-prd/ProjetctWarehouse/Bronze - Ingest",
+								"baseParameters": {
+									"Tabela": "replace(@item().file_name, '.parquet', '')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "LS_Warehouse_ADB",
+								"type": "LinkedServiceReference"
 							}
 						}
 					]
