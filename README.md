@@ -1,7 +1,7 @@
 # Projeto Data Warehouse
 
 ## 📌 Visão Geral
-Esse Projeto tem como objetivo criar um pipeline de ETL completo utilizando a abordagem **Full Load**. A ingestão de dados ocorre a partir de um banco **OLTP**, transformando os dados em **Parquet** e armazenando-os em um **Data Lake**.
+Esse Projeto tem como objetivo criar um pipeline completo . A ingestão de dados ocorre a partir de um banco **OLTP**, transformando os dados em **Parquet** e armazenando-os em um **Data Lake**.
 
 A arquitetura final seguirá o modelo **Estrela**, mas essa etapa ainda não foi implementada.
 
