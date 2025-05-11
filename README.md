@@ -1,4 +1,4 @@
-# Projeto Data Warehouse
+# Projeto Data Lakehouse
 
 ## 📌 Visão Geral
 Esse Projeto tem como objetivo criar um pipeline completo . A ingestão de dados ocorre a partir de um banco **OLTP**, transformando os dados em **Parquet** e armazenando-os em um **Data Lake**.
